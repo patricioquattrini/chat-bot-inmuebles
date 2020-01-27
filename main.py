@@ -23,28 +23,22 @@ def start(bot, context):
     return INMUEBLE
 
 def inmueble(bot, context):
-    print("entre en tipoDeInbueble")
-    print(bot.message.text)
     global input_inmueble
     input_inmueble = bot.message.text
     bot.message.reply_text("Ingrese el barrio/localidad o presione /skip para continuar", reply_markup=ReplyKeyboardRemove())
     return BARRIO
 
 def barrio(bot, context):
-    print("Entre a barrio")
     global input_barrio
     input_barrio = bot.message.text
-    print(input_barrio)
     bot.message.reply_text('Ingrese la cantidad de ambientes o presione /skip para continuar')
     return AMBIENTES
 
 def skip_barrio(bot, context):
-    print("Entre a skip_barrio")
     bot.message.reply_text('Ingrese la cantidad de ambientes o presione /skip para continuar')
     return AMBIENTES
 
 def ambientes(bot, context):
-    print("Entre en ambientes")
     global input_ambientes
     input_ambientes = bot.message.text
     if not input_ambientes.isdigit():
@@ -54,12 +48,10 @@ def ambientes(bot, context):
     return PRECIOHASTA
 
 def skip_ambientes(bot, context):
-    print("Entre en skip_ambientes")
     bot.message.reply_text('Ingrese precio maximo sin puntos ni comas o presione /skip para continuar')
     return PRECIOHASTA
 
 def precioHasta(bot, context):
-    print("Entre en precioHasta")
     global input_preciohasta
     input_preciohasta = bot.message.text
     if not input_preciohasta.isnumeric():
@@ -70,14 +62,11 @@ def precioHasta(bot, context):
     return ConversationHandler.END
 
 def skip_precioHasta(bot, context):
-    print("ENTRE skip_precioHasta")
     bot.message.reply_text('Aguarde un momento mientras recopilamos la información. Esto puede tardar algunos minutos dependiendo de la cantidad de departamentos encontrados.')
     resultado(bot, context)
     return ConversationHandler.END
 
 def resultado(bot, context):
-    print("Entre a resultado")
-    print(input_barrio, input_ambientes, input_preciohasta)
     zonaprop.BuscarDeptos(lista_zonaprop,inmueble=input_inmueble, barrio=input_barrio, ambientes=input_ambientes, precioHasta=input_preciohasta)
     tam_ls = len(lista_zonaprop)
     if tam_ls:
@@ -98,7 +87,7 @@ def cancel(update, context):
 
 def main():
 
-    bot = Updater("TOKEN", use_context=True)
+    bot = Updater("815006334:AAF66CmViF9FD1WedJFNNgKlG2-ZoBb87RY", use_context=True)
     dp = bot.dispatcher
 
     # https://github.com/python-telegram-bot/python-telegram-bot/blob/master/examples/conversationbot.py

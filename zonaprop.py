@@ -15,7 +15,6 @@ class Zonaprop():
             if i == 1:
                 noHayAvisos = soup.find_all("div", class_="no-results__message")
                 if len(noHayAvisos):
-                    print("No hay deptos con esas condiciones")
                     break
                 cantDeptosSoup = soup.find_all("h1", class_="list-result-title")
                 cantDeptosText = cantDeptosSoup[0].text
@@ -56,9 +55,7 @@ class Zonaprop():
 
 
     def obtenerUrl(self,inmueble=None, barrio=None, ambientes=None, precioHasta=None):
-        print("Entre en obtener url")
         urlPrep = self.urlBase
-        print(type(inmueble))
         inmueble = inmueble.lower()
         inmueble = inmueble.replace(" ", "-")
         urlPrep = urlPrep + inmueble + "-alquiler"
@@ -77,5 +74,4 @@ class Zonaprop():
             ##precioHasta = str(precioHasta)
             urlPrep = urlPrep + "-menos-" + precioHasta + "-pesos"
         urlPrep = urlPrep + "-orden-publicado-descendente.html"
-        print("Url a revisar "+urlPrep)
         return urlPrep
